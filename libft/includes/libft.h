@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:56:43 by scamargo          #+#    #+#             */
-/*   Updated: 2018/01/23 16:44:59 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/12 13:11:12 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <fcntl.h>
+
+# define MAX_FD 4864
+# define BUFF_SIZE 500
 
 typedef struct	s_list
 {
@@ -116,7 +120,9 @@ char			*ft_itoa_base(int nbr, int base);
 void			ft_enqueue(t_queue *queue, void *content);
 void			*ft_dequeue(t_queue *queue);
 void			*ft_queue_peek(t_queue *queue);
-int			ft_is_queue_empty(t_queue *queue);
+int				ft_is_queue_empty(t_queue *queue);
 t_queue			*ft_queue_init(void);
+
+int				get_next_line(const int fd, char **line);
 
 #endif

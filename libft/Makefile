@@ -6,7 +6,7 @@
 #    By: scamargo <scamargo@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/30 21:11:57 by scamargo          #+#    #+#              #
-#    Updated: 2018/01/10 14:25:22 by scamargo         ###   ########.fr        #
+#    Updated: 2018/03/12 12:55:13 by scamargo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c 
 		ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstaddtoend.c ft_lstiter.c ft_lstmap.c \
 		ft_sqrt.c ft_power.c ft_sort_integer_table.c ft_factorial.c ft_range.c \
 		ft_init_chartable.c ft_destroy_chartable.c ft_strrev.c \
-		ft_arrlist.c ft_itoa_base.c ft_queue.c
+		ft_arrlist.c ft_itoa_base.c ft_queue.c get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
 

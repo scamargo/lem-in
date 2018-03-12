@@ -1,0 +1,15 @@
+echo "============="
+echo "Input Parsing"
+echo "============="
+
+echo
+echo "ERROR CASES"
+echo "zero ants:"
+./lem-in < test-maps/zero_ants_invalid.map
+echo "negative ants:"
+./lem-in < test-maps/neg_ants_invalid.map
+
+echo
+echo "VALID CASES"
+echo "valid map:"
+./lem-in < test-maps/valid.map
