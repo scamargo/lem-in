@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:56:43 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/12 13:11:12 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/12 15:37:29 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define MAX_FD 4864
 # define BUFF_SIZE 500
+# define STDIN 0
 
 typedef struct	s_list
 {

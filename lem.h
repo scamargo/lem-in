@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/12 15:02:22 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/12 18:35:46 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 # include "libft.h"
 # include <stdbool.h>
 
+// TODO: add enum for room_type
+
 typedef struct	s_room
 {
-	enum			types {none, start, end}type;
+	char			*name;
+	int				type;
 	t_list			*adjecent_rooms;
 	struct s_room	*parent;
 	bool			visited;
@@ -31,6 +34,7 @@ typedef struct	s_lem
 	int				number_of_ants;
 	t_list			*valid_paths;
 	unsigned int	baseline_turns;
+	char			*input;
 }				t_lem;
 
 #endif
