@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 12:56:43 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/12 21:49:20 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/13 09:26:28 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "ft_printf.h"
 
 # define MAX_FD 4864
 # define BUFF_SIZE 500
@@ -126,5 +127,8 @@ int				ft_is_queue_empty(t_queue *queue);
 t_queue			*ft_queue_init(void);
 
 int				get_next_line(const int fd, char **line);
+
+void			ft_strcatmulti(char *s1, char *s2, size_t times);
+void			ft_strupper(char *str);
 
 #endif

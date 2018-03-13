@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/12 22:10:30 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/13 09:41:21 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		parse_room(t_lem *meta, char *line, int type) // TODO: use enum room_type i
 	room->parent = NULL;
 	room->adjecent_rooms = NULL;
 	new = ft_lstnew(room, sizeof(t_room));
-	ft_lstadd(&meta->rooms, new); //will this work even if meta->room is null
+	ft_lstadd(&meta->rooms, new);
 	return (1);
 }
 
@@ -158,7 +158,7 @@ int		main(void)
 
 	if (!(meta = (t_lem*)ft_memalloc(sizeof(t_lem))))
 	{
-		printf("MALLOC ERROR\n");
+		ft_printf("MALLOC ERROR\n");
 		return (2);
 	}
 	meta->rooms = NULL;
@@ -168,9 +168,9 @@ int		main(void)
 	meta->input = NULL;
 	if (!parse_input(meta))
 	{
-		printf("ERROR\n");
+		ft_printf("ERROR\n");
 		return (1);
 	}
-	printf("%s\n", meta->input); // TODO: use ft_printf
+	ft_printf("%s\n", meta->input); // TODO: use ft_ft_printf
 	return (0);
 }
