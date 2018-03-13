@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/12 19:12:30 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/12 22:10:30 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		ft_get_line(char **p_buffer, char **p_line)
 	return (0);
 }
 
-int		parse_ants(t_lem *meta, char **p_buffer)
+int		parse_ants(t_lem *meta, char **p_buffer) // TODO: make sure the ants is only numbers
 {
 	char	*line;
 
@@ -48,6 +48,19 @@ int		parse_ants(t_lem *meta, char **p_buffer)
 	return (1);
 }
 
+char	*parse_room_name(char *room_info)
+{
+	size_t	len;
+	char	*result;
+
+	len = 0;
+	while (room_info[len] && room_info[len] != ' ')
+		len++;
+	result = ft_strndup(room_info, len);
+	// TODO: validate coordinates
+	return (result);
+}
+
 int		parse_room(t_lem *meta, char *line, int type) // TODO: use enum room_type instead of int
 {
 
@@ -57,18 +70,15 @@ int		parse_room(t_lem *meta, char *line, int type) // TODO: use enum room_type i
 	if (!(room = (t_room*)ft_memalloc(sizeof(t_room))))
 		return (0);
 	if (type != 0 && type != 1 && type != 2)
-	{
-		printf("trying to use an invalid room type"); // TODO: remove after testing
 		return (0);
-	}
-	room->name = ft_strdup(line); // TODO: make sure this line is valid
+	if (!(room->name = parse_room_name(line)))
+		return (0);
 	room->type = type;
 	room->visited = 0;
 	room->parent = NULL;
 	room->adjecent_rooms = NULL;
 	new = ft_lstnew(room, sizeof(t_room));
 	ft_lstadd(&meta->rooms, new); //will this work even if meta->room is null
-	// TODO: use first and second space to move pointer along ft_strchr(' ');
 	return (1);
 }
 
@@ -107,6 +117,8 @@ int		parse_room_list(t_lem *meta, char **p_buffer) // TODO: return 1 if hit tube
 		}
 		free(line);
 	}
+	if (!has_start || !has_end)
+		return (0);
 	return (1);
 }
 
@@ -135,7 +147,6 @@ int		parse_input(t_lem *meta)
 		return (0);
 	if (!parse_room_list(meta, &buffer))
 		return (0);
-	printf("room #1 name: %s\n", ((t_room*)meta->rooms->content)->name);
 	/*if (!parse_tubes(meta))
 		return (0);*/
 	return (1);

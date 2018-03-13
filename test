@@ -1,3 +1,6 @@
+#Any non compliant or empty lines will automatically stop the ant farm’s reading
+#as well as the orderly processing of the acquired data.
+
 echo "============="
 echo "Input Parsing"
 echo "============="
@@ -5,11 +8,21 @@ echo "============="
 echo
 echo "ERROR CASES"
 echo "zero ants:"
-./lem-in < test-maps/zero_ants_invalid.map
+./lem-in < maps/zero_ants_invalid.map
 echo "negative ants:"
-./lem-in < test-maps/neg_ants_invalid.map
+./lem-in < maps/neg_ants_invalid.map
+echo "no start:"
+./lem-in < maps/no_start_invalid.map
+echo "no end:"
+./lem-in < maps/no_end_invalid.map
+echo "no coordinates"
+./lem-in < maps/no_coords_invalid.map
+echo "coords invalid"
+./lem-in < maps/coords_invalid.map
+echo "no tubes:"
+./lem-in < maps/no_tubes_invalid.map
 
 echo
 echo "VALID CASES"
 echo "valid map:"
-./lem-in < test-maps/valid.map
+./lem-in < maps/valid.map
