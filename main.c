@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/14 12:11:27 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:22:35 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int		parse_input(t_lem *meta)
 		return (0);
 	ft_printf("room_name: %s\n", ((t_room*)meta->rooms->content)->name);
 	ft_printf("room_name: %s\n", ((t_room*)meta->rooms->next->content)->name);
-	/*if (!parse_tubes(meta))
-		return (0);*/
+	//if (!parse_tubes(meta))
+	//	return (0);
 	return (1);
 }
 

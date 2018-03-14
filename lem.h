@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/13 21:08:24 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:20:03 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include "libft.h"
 # include <stdbool.h>
 
-// TODO: add enum for room_type
+/*
+ *** TODO: add enum for room_type
+*/
 
 typedef struct	s_room
 {
