@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/13 21:37:06 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:11:27 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 static int		parse_ants(t_lem *meta, char **p_buffer)
 {
 	char	*line;
-	int		i;
 
 	if (!ft_get_line(p_buffer, &line))
 		return (0);
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isdigit(line[i++]))
-			return (0);
-	}
+	if (!ft_stronlydigits(line))
+		return (0);
 	meta->number_of_ants = ft_atoi(line);
 	if (meta->number_of_ants <= 0)
 		return (0);

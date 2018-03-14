@@ -6,29 +6,38 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:02:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/13 21:50:40 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:09:21 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 
 /*
-*** TODO: validate coordinates
+*** PURPOSE: parse room name & ensures coordinates are valid
 */
 
-static char	*parse_room_name(char *room_info)
+static int	parse_room_details(char *room_text, t_room *room)
 {
-	size_t		len;
-	char		*result;
+	size_t		arr_len;
+	char		**str_arr;
 
-	len = 0;
-	while (room_info[len] && room_info[len] != ' ')
-		len++;
-	result = ft_strndup(room_info, len);
-	return (result);
+	str_arr = ft_strsplit(room_text, ' ');
+	arr_len = 0;
+	while (str_arr[arr_len])
+		arr_len++;
+	if (arr_len != 3)
+		return (0);
+	room->name = str_arr[0];
+	if (!ft_stronlydigits(str_arr[1]) || !ft_stronlydigits(str_arr[2]))
+		return (0);
+	free(str_arr[1]);
+	free(str_arr[2]);
+	free(str_arr);
+	return (1);
 }
 
 /*
+*** TODO: prevent duplicate names!!!!!!!!!!!!!!
 *** TODO: use enum e_room_type instead of int
 */
 
@@ -43,7 +52,7 @@ static int	parse_room(t_lem *meta, char *line, int type)
 		return (0);
 	if (type != 0 && type != 1 && type != 2)
 		return (0);
-	if (!(room->name = parse_room_name(line)))
+	if (!(parse_room_details(line, room)))
 		return (0);
 	room->type = type;
 	room->visited = 0;

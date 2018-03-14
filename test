@@ -17,13 +17,13 @@ echo "no start command:"
 ./lem-in < maps/no_start_invalid.map
 echo "no end command:"
 ./lem-in < maps/no_end_invalid.map
-echo "no start room"
+echo "no start room:"
 ./lem-in < maps/no_start_room.map
-echo "no end room"
+echo "no end room:"
 ./lem-in < maps/no_end_room.map
-echo "no coordinates"
+echo "no coordinates:"
 ./lem-in < maps/no_coords_invalid.map
-echo "coords invalid"
+echo "coords invalid:"
 ./lem-in < maps/coords_invalid.map
 echo "no tubes:"
 ./lem-in < maps/no_tubes_invalid.map
