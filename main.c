@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/13 20:08:04 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:16:00 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  ***TODO: make sure the ants input is only numbers
 */
 
-int		parse_ants(t_lem *meta, char **p_buffer)
+static int		parse_ants(t_lem *meta, char **p_buffer)
 {
 	char	*line;
 
@@ -28,14 +28,12 @@ int		parse_ants(t_lem *meta, char **p_buffer)
 	free(line);
 	return (1);
 }
-
-int		parse_input(t_lem *meta)
+static void		read_input(t_lem *meta)
 {
-	char		buff[BUFF_SIZE + 1];
-	int			reader;
-	char		*temp;
-	char		*buffer;
-
+	char	buff[BUFF_SIZE + 1];
+	int		reader;
+	char	*temp;
+	
 	while ((reader = read(0, buff, BUFF_SIZE)))
 	{
 		buff[reader] = '\0';
@@ -48,10 +46,19 @@ int		parse_input(t_lem *meta)
 			free(temp);
 		}
 	}
+}
+
+static int		parse_input(t_lem *meta)
+{
+	char		*buffer;
+	char		*current_line;
+
+	current_line = NULL;
+	read_input(meta);
 	buffer = ft_strdup(meta->input);
 	if (!parse_ants(meta, &buffer))
 		return (0);
-	if (!parse_room_list(meta, &buffer))
+	if (!parse_room_list(meta, &buffer, &current_line))
 		return (0);
 	ft_printf("room_name: %s\n", ((t_room*)meta->rooms->content)->name);
 	ft_printf("room_name: %s\n", ((t_room*)meta->rooms->next->content)->name);
