@@ -25,6 +25,8 @@ echo "no coordinates:"
 ./lem-in < maps/no_coords_invalid.map
 echo "coords invalid:"
 ./lem-in < maps/coords_invalid.map
+echo "duplicate room name:"
+./lem-in < maps/duplicate_rooms_invalid.map
 echo "no tubes:"
 ./lem-in < maps/no_tubes_invalid.map
 

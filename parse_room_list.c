@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:02:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/14 12:09:21 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:59:42 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 *** PURPOSE: parse room name & ensures coordinates are valid
 */
 
-static int	parse_room_details(char *room_text, t_room *room)
+static int	parse_room_details(t_lem *meta, char *room_text, t_room *room)
 {
 	size_t		arr_len;
 	char		**str_arr;
+	t_list		*rooms;
 
 	str_arr = ft_strsplit(room_text, ' ');
 	arr_len = 0;
@@ -30,6 +31,13 @@ static int	parse_room_details(char *room_text, t_room *room)
 	room->name = str_arr[0];
 	if (!ft_stronlydigits(str_arr[1]) || !ft_stronlydigits(str_arr[2]))
 		return (0);
+	rooms = meta->rooms;
+	while (rooms)
+	{
+		if (ft_strcmp(((t_room*)rooms->content)->name, room->name) == 0)
+			return (0);
+		rooms = rooms->next;
+	}
 	free(str_arr[1]);
 	free(str_arr[2]);
 	free(str_arr);
@@ -52,7 +60,7 @@ static int	parse_room(t_lem *meta, char *line, int type)
 		return (0);
 	if (type != 0 && type != 1 && type != 2)
 		return (0);
-	if (!(parse_room_details(line, room)))
+	if (!(parse_room_details(meta, line, room)))
 		return (0);
 	room->type = type;
 	room->visited = 0;
