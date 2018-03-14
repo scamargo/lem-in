@@ -11,10 +11,14 @@ echo "zero ants:"
 ./lem-in < maps/zero_ants_invalid.map
 echo "negative ants:"
 ./lem-in < maps/neg_ants_invalid.map
-echo "no start:"
+echo "no start command:"
 ./lem-in < maps/no_start_invalid.map
-echo "no end:"
+echo "no end command:"
 ./lem-in < maps/no_end_invalid.map
+echo "no start room"
+./lem-in < maps/no_start_room.map
+echo "no end room"
+./lem-in < maps/no_end_room.map
 echo "no coordinates"
 ./lem-in < maps/no_coords_invalid.map
 echo "coords invalid"

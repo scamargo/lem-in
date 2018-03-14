@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/12 18:35:46 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/13 10:13:00 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ typedef struct	s_lem
 	unsigned int	baseline_turns;
 	char			*input;
 }				t_lem;
+
+int				parse_room_list(t_lem *meta, char **p_buffer);
 
 #endif

@@ -1,6 +1,6 @@
 CC = gcc
 NAME = lem-in
-SRCS = main.c
+SRCS = main.c parse_room_list.c
 LIB = libft/libft.a
 FLAGS = -Wextra -Werror -Wall
 INC = libft/includes

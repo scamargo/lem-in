@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_queue.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/13 09:56:39 by scamargo          #+#    #+#             */
+/*   Updated: 2018/03/13 09:58:16 by scamargo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int		ft_is_queue_empty(t_queue *queue)
@@ -7,18 +19,18 @@ int		ft_is_queue_empty(t_queue *queue)
 	return (0);
 }
 
-void		*ft_queue_peek(t_queue *queue)
+void	*ft_queue_peek(t_queue *queue)
 {
 	if (!queue || !queue->first)
 		return (NULL);
 	return (queue->first->content);
 }
 
-void		*ft_dequeue(t_queue *queue)
+void	*ft_dequeue(t_queue *queue)
 {
-	void *content;
-	struct s_node *old_first;
-	
+	void			*content;
+	struct s_node	*old_first;
+
 	if (!queue || !queue->first)
 		return (NULL);
 	content = queue->first->content;
@@ -34,10 +46,10 @@ void		*ft_dequeue(t_queue *queue)
 	return (content);
 }
 
-void		ft_enqueue(t_queue *queue, void *content)
+void	ft_enqueue(t_queue *queue, void *content)
 {
 	struct s_node *node;
-	
+
 	if (!queue)
 		return ;
 	if ((node = (struct s_node*)ft_memalloc(sizeof(struct s_node))))
@@ -51,7 +63,8 @@ void		ft_enqueue(t_queue *queue, void *content)
 		queue->last = node;
 	}
 }
-t_queue		*ft_queue_init(void)
+
+t_queue	*ft_queue_init(void)
 {
 	t_queue	*queue;
 
