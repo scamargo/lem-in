@@ -9,6 +9,8 @@ echo
 echo "ERROR CASES"
 echo "zero ants:"
 ./lem-in < maps/zero_ants_invalid.map
+echo "number of ants invalid:"
+./lem-in < maps/number_of_ants_invalid.map
 echo "negative ants:"
 ./lem-in < maps/neg_ants_invalid.map
 echo "no start command:"

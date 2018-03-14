@@ -6,34 +6,38 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/13 21:16:00 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:37:06 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 
-/*
- ***TODO: make sure the ants input is only numbers
-*/
-
 static int		parse_ants(t_lem *meta, char **p_buffer)
 {
 	char	*line;
+	int		i;
 
 	if (!ft_get_line(p_buffer, &line))
 		return (0);
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i++]))
+			return (0);
+	}
 	meta->number_of_ants = ft_atoi(line);
 	if (meta->number_of_ants <= 0)
 		return (0);
 	free(line);
 	return (1);
 }
+
 static void		read_input(t_lem *meta)
 {
 	char	buff[BUFF_SIZE + 1];
 	int		reader;
 	char	*temp;
-	
+
 	while ((reader = read(0, buff, BUFF_SIZE)))
 	{
 		buff[reader] = '\0';
@@ -67,9 +71,10 @@ static int		parse_input(t_lem *meta)
 	return (1);
 }
 
-int		main(void)
+int				main(void)
 {
 	t_lem	*meta;
+
 	if (!(meta = (t_lem*)ft_memalloc(sizeof(t_lem))))
 	{
 		ft_printf("MALLOC ERROR\n");

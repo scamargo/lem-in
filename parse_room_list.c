@@ -6,20 +6,20 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:02:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/13 21:17:41 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:50:40 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
 
 /*
- *** TODO: validate coordinates
+*** TODO: validate coordinates
 */
 
 static char	*parse_room_name(char *room_info)
 {
-	size_t	len;
-	char	*result;
+	size_t		len;
+	char		*result;
 
 	len = 0;
 	while (room_info[len] && room_info[len] != ' ')
@@ -29,13 +29,13 @@ static char	*parse_room_name(char *room_info)
 }
 
 /*
- *** TODO: use enum e_room_type instead of int
+*** TODO: use enum e_room_type instead of int
 */
 
 static int	parse_room(t_lem *meta, char *line, int type)
 {
-	t_room	*room;
-	t_list	*new;
+	t_room		*room;
+	t_list		*new;
 
 	if (line[0] == '#')
 		return (1);
@@ -56,7 +56,7 @@ static int	parse_room(t_lem *meta, char *line, int type)
 
 static int	parse_room_type(char *command, bool *p_has_start, bool *p_has_end)
 {
-	int room_type;
+	int			room_type;
 
 	if (ft_strcmp(command, "##start") == 0)
 	{
@@ -71,7 +71,7 @@ static int	parse_room_type(char *command, bool *p_has_start, bool *p_has_end)
 	return (room_type);
 }
 
-int		is_tube(char *line)
+int			is_tube(char *line)
 {
 	if (ft_strchr(line, '-'))
 		return (1);
@@ -79,20 +79,20 @@ int		is_tube(char *line)
 }
 
 /*
- *** Input: graph meta, pointer to input buffer, & pointer to current buffer line
- *** Output: int signifying whether parsing was successfull
+*** Input: graph meta, ptr to input buffer, & ptr to current buffer line
+*** Output: int signifying whether parsing was successfull
 */
 
 int			parse_room_list(t_lem *meta, char **p_buffer, char **p_line)
 {
-	bool	has_start;
-	bool	has_end;
-	int		room_type;
+	bool		has_start;
+	bool		has_end;
+	int			room_type;
 
 	while (ft_get_line(p_buffer, p_line) && !is_tube(*p_line))
 	{
 		room_type = 0;
-		if (ft_strcmp(*p_line, "##start") == 0 || ft_strcmp(*p_line, "##end") == 0)
+		if (!ft_strcmp(*p_line, "##start") || !ft_strcmp(*p_line, "##end"))
 		{
 			room_type = parse_room_type(*p_line, &has_start, &has_end);
 			free(*p_line);
