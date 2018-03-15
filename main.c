@@ -6,75 +6,11 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/15 15:44:05 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:11:54 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
-
-static int		get_room(t_list *current_node, t_room **p_matching_room, char *room_name)
-{
-	t_room	*room;
-
-	while (current_node)
-	{
-		room = (t_room*)current_node->content; 
-		if (ft_strcmp(room_name, room->name) == 0)
-		{
-			*p_matching_room = room;
-			return (1);
-		}
-		current_node = current_node->next;
-	}
-	return (0);
-}
-
-static int		add_connection(int max_connections, t_room *room, t_room *adjecent)
-{
-	int i;
-
-	if (!room->adjecent_rooms)
-	{
-		if (!(room->adjecent_rooms = (t_room**)ft_memalloc(sizeof(t_room*) * (max_connections + 1))))
-			return (0);
-	}
-	i = 0;
-	while (room->adjecent_rooms[i])
-		i++;
-	room->adjecent_rooms[i] = adjecent;
-	return (1);
-}
-
-static int		parse_tubes(t_lem *meta, char *buffer, char *current_line)
-{
-	char	**rooms_arr;
-	t_room	*room1;
-	t_room	*room2;
-
-	if (!current_line)
-		return (0);
-	while(1)
-	{
-		if (current_line[0] != '#')
-		{
-			rooms_arr = ft_strsplit(current_line, '-');
-			if (!rooms_arr[0] || !rooms_arr[1] || rooms_arr[2] != 0)
-				return (1);
-			if (!ft_strcmp(rooms_arr[0], rooms_arr[1]))
-				return (1);
-			if (!get_room(meta->rooms, &room1, rooms_arr[0]))
-				return (1);
-			if (!get_room(meta->rooms, &room2, rooms_arr[1]))
-				return (1);
-			if (!add_connection(meta->number_of_rooms, room1, room2))
-				return (1);
-			add_connection(meta->number_of_rooms, room2, room1);
-		}
-		if(!ft_get_line(&buffer, &current_line))
-			break;
-	}
-	return (1);
-}
 
 static int		parse_ants(t_lem *meta, char **p_buffer)
 {
@@ -123,13 +59,8 @@ static int		parse_input(t_lem *meta)
 		return (0);
 	if (!parse_room_list(meta, &buffer, &current_line))
 		return (0);
-	if(!parse_tubes(meta, buffer, current_line))
+	if (!parse_tubes(meta, buffer, current_line))
 		return (0);
-	t_room	*room;
-	room = (t_room*)meta->rooms->content;
-	ft_printf("connections; %s->%s\n", room->name, ((t_room**)room->adjecent_rooms)[0]->name);
-	// TODO: should this second one be failing??
-	ft_printf("connections; %s->%s\n", room->name, ((t_room**)room->adjecent_rooms)[1]->name);
 	return (1);
 }
 
