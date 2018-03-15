@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/14 22:21:20 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:44:05 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		add_connection(int max_connections, t_room *room, t_room *adjecent)
 
 	if (!room->adjecent_rooms)
 	{
-		if (!(room->adjecent_rooms = (t_room**)ft_memalloc(sizeof(t_room*) * max_connections)))
+		if (!(room->adjecent_rooms = (t_room**)ft_memalloc(sizeof(t_room*) * (max_connections + 1))))
 			return (0);
 	}
 	i = 0;
@@ -53,7 +53,7 @@ static int		parse_tubes(t_lem *meta, char *buffer, char *current_line)
 
 	if (!current_line)
 		return (0);
-	while(ft_get_line(&buffer, &current_line))
+	while(1)
 	{
 		if (current_line[0] != '#')
 		{
@@ -70,6 +70,8 @@ static int		parse_tubes(t_lem *meta, char *buffer, char *current_line)
 				return (1);
 			add_connection(meta->number_of_rooms, room2, room1);
 		}
+		if(!ft_get_line(&buffer, &current_line))
+			break;
 	}
 	return (1);
 }
