@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/14 12:20:03 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 22:09:26 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct	s_room
 {
 	char			*name;
 	int				type;
-	t_list			*adjecent_rooms;
+	struct s_room	**adjecent_rooms;
 	struct s_room	*parent;
 	bool			visited;
 }				t_room;
@@ -37,6 +37,7 @@ typedef struct	s_lem
 	t_list			*valid_paths;
 	unsigned int	baseline_turns;
 	char			*input;
+	unsigned		number_of_rooms;
 }				t_lem;
 
 int				parse_room_list(t_lem *meta, char **p_buffer, char **p_line);

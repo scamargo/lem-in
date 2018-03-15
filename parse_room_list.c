@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:02:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/14 12:59:42 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/14 22:08:54 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	parse_room_details(t_lem *meta, char *room_text, t_room *room)
 }
 
 /*
-*** TODO: prevent duplicate names!!!!!!!!!!!!!!
+*** TODO: ensure room names dont start with "L"
 *** TODO: use enum e_room_type instead of int
 */
 
@@ -118,6 +118,8 @@ int			parse_room_list(t_lem *meta, char **p_buffer, char **p_line)
 		}
 		if (!parse_room(meta, *p_line, room_type))
 			return (0);
+		if (*p_line[0] != '#')
+			meta->number_of_rooms++;
 		free(*p_line);
 	}
 	if (!has_start || !has_end)
