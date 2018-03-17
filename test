@@ -29,6 +29,11 @@ echo "duplicate room name:"
 ./lem-in < maps/duplicate_rooms_invalid.map
 echo "no tubes:"
 ./lem-in < maps/no_tubes_invalid.map
+echo "duplicate start rooms:"
+./lem-in < maps/duplicate_start_invalid.map
+echo "room name starts with L:"
+./lem-in < maps/starts_with_L_invalid.map
+
 
 echo
 echo "VALID CASES"

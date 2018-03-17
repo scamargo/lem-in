@@ -6,11 +6,12 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:02:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/14 22:08:54 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/16 19:01:41 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem.h"
+#include <stdio.h>
 
 /*
 *** PURPOSE: parse room name & ensures coordinates are valid
@@ -26,7 +27,7 @@ static int	parse_room_details(t_lem *meta, char *room_text, t_room *room)
 	arr_len = 0;
 	while (str_arr[arr_len])
 		arr_len++;
-	if (arr_len != 3)
+	if (arr_len != 3 || room_text[0] == 'L')
 		return (0);
 	room->name = str_arr[0];
 	if (!ft_stronlydigits(str_arr[1]) || !ft_stronlydigits(str_arr[2]))
@@ -56,16 +57,22 @@ static int	parse_room(t_lem *meta, char *line, int type)
 
 	if (line[0] == '#')
 		return (1);
-	if (!(room = (t_room*)ft_memalloc(sizeof(t_room))))
-		return (0);
 	if (type != 0 && type != 1 && type != 2)
+		return (0);
+	if (!init_room(&room, type))
 		return (0);
 	if (!(parse_room_details(meta, line, room)))
 		return (0);
-	room->type = type;
-	room->visited = 0;
-	room->parent = NULL;
-	room->adjecent_rooms = NULL;
+	if (type == 1)
+	{
+		if (!init_start_room(meta, room))
+			return (0);
+	}
+	else if (type == 2)
+	{
+		if (!add_end_room(meta, room))
+			return (0);
+	}
 	new = ft_lstnew(room, sizeof(t_room));
 	ft_lstadd(&meta->rooms, new);
 	return (1);
@@ -96,6 +103,7 @@ int			is_tube(char *line)
 }
 
 /*
+*** TODO: set pointers to start & end rooms
 *** Input: graph meta, ptr to input buffer, & ptr to current buffer line
 *** Output: int signifying whether parsing was successfull
 */

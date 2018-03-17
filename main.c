@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/15 16:11:54 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:24:12 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int		parse_input(t_lem *meta)
 {
 	char		*buffer;
 	char		*current_line;
-
 	current_line = NULL;
 	read_input(meta);
 	buffer = ft_strdup(meta->input);
@@ -64,26 +63,61 @@ static int		parse_input(t_lem *meta)
 	return (1);
 }
 
+static int		init_lem(t_lem **p_meta)
+{
+	if (!(*p_meta = (t_lem*)ft_memalloc(sizeof(t_lem))))
+	{
+		ft_printf("MALLOC ERROR\n");
+		return (0);
+	}
+	(*p_meta)->rooms = NULL;
+	(*p_meta)->number_of_ants = 0;
+	(*p_meta)->valid_paths = NULL;
+	(*p_meta)->baseline_turns = 0;
+	(*p_meta)->input = NULL;
+	(*p_meta)->number_of_rooms = 0;
+	(*p_meta)->start = NULL;
+	(*p_meta)->end_rooms = NULL;
+	return (1);
+}
+
 int				main(void)
 {
 	t_lem	*meta;
+	t_list	*paths;
+	t_list	*new_path;
+	size_t	path_index;
+	size_t	baseline;
 
-	if (!(meta = (t_lem*)ft_memalloc(sizeof(t_lem))))
-	{
-		ft_printf("MALLOC ERROR\n");
+	path_index = 0; // JUST FOR TESTING
+	if (!init_lem(&meta))
 		return (2);
-	}
-	meta->rooms = NULL;
-	meta->number_of_ants = 0;
-	meta->valid_paths = NULL;
-	meta->baseline_turns = 0;
-	meta->input = NULL;
-	meta->number_of_rooms = 0;
 	if (!parse_input(meta))
 	{
 		ft_printf("ERROR\n");
 		return (1);
 	}
+	baseline = 0;
+	// TODO: remove two lines below
+	new_path = found_another_path(meta, &baseline);
+	ft_lstadd(&paths, new_path);
+	/*while ((new_path = found_another_path(meta, &baseline)))
+	{
+		ft_lstadd(&paths, new_path);
+	}*/
 	ft_printf("%s\n", meta->input);
+	//send ants down each path
+	/*bool all_ants_at_end = false;
+	while (!all_ants_at_end)
+	{
+		path_index = 0;
+		// iterate through paths
+		while (paths[path_index])
+		{
+			// move ants along current path
+			send_ants_down_path(meta, paths[path_index++], &all_ants_at_end);
+		}
+		ft_printf("\n");
+	}*/
 	return (0);
 }
