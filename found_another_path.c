@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 16:52:47 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/16 12:24:59 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/16 23:00:27 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ t_list	*found_another_path(t_lem *meta, size_t *baseline)
 	int		number_of_paths;
 	int		path_step_count;
 
+	head_room_node = NULL;
 	// add first room
-	get_room(meta->rooms, &room, "1");
-	current_room_node = ft_lstnew(&room, sizeof(t_room*));
-	ft_lstadd(&head_room_node, current_room_node);
-	// add next room
-	get_room(meta->rooms, &room, "2");
+	get_room(meta->rooms, &room, "0");
 	current_room_node = ft_lstnew(&room, sizeof(t_room*));
 	ft_lstadd(&head_room_node, current_room_node);
 	// add next room
 	get_room(meta->rooms, &room, "4");
 	current_room_node = ft_lstnew(&room, sizeof(t_room*));
 	ft_lstadd(&head_room_node, current_room_node);
+	// add next room
+	get_room(meta->rooms, &room, "2");
+	current_room_node = ft_lstnew(&room, sizeof(t_room*));
+	ft_lstadd(&head_room_node, current_room_node);
 	// add exit 
-	get_room(meta->rooms, &room, "0");
+	get_room(meta->rooms, &room, "1");
 	current_room_node = ft_lstnew(&room, sizeof(t_room*));
 	ft_lstadd(&head_room_node, current_room_node);
 	// set baseline
@@ -48,6 +49,6 @@ t_list	*found_another_path(t_lem *meta, size_t *baseline)
 	*baseline = ants_on_slowest_path + path_step_count - 1; // Test
 	ft_printf("baseline: %i\n", *baseline);
 	// create path
-	path = ft_lstnew(head_room_node, sizeof(t_list*));
+	path = ft_lstnew(head_room_node, sizeof(t_list)); //should this be &head_room_node???
 	return (path);
 }
