@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 11:52:12 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 12:30:23 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static int		parse_input(t_lem *meta)
 {
 	char		*buffer;
 	char		*current_line;
+
 	current_line = NULL;
 	read_input(meta);
 	buffer = ft_strdup(meta->input);
@@ -62,69 +63,6 @@ static int		parse_input(t_lem *meta)
 	if (!parse_tubes(meta, buffer, current_line))
 		return (0);
 	return (1);
-}
-
-// TODO: print from the back
-static void		send_ants_down_path(t_list *current_path, bool *p_all_ants_at_end)
-{
-	int departing_ant;
-	int arriving_ant;
-	t_room	*curr_room;
-	t_room	*parent_room;
-	t_list	*curr_room_node;
-	char	*output;
-	
-	output = "";
-	curr_room_node = (t_list*)current_path->content;
-	arriving_ant = 0;
-	while (curr_room_node)
-	{
-		curr_room = *(t_room**)curr_room_node->content;
-		if (arriving_ant)
-		{
-			ft_asprintf(&output, "L%i-%s %s", arriving_ant, curr_room->name, output);
-			//ft_printf("L%i-%s ", arriving_ant, curr_room->name);
-			curr_room->number_of_ants++;
-			if (curr_room->type != 2)
-				*p_all_ants_at_end = false;
-		}	
-		if((departing_ant = curr_room->next_ant_in_line))
-			curr_room->number_of_ants--;
-		//ft_printf("room type: %i\n", curr_room->type);
-		if (curr_room->type == 1 && curr_room->number_of_ants > 0) //make sure this will eventually set start next_in_line to zero
-		{
-			curr_room->next_ant_in_line++;
-			*p_all_ants_at_end = false;
-		}	
-		else
-			curr_room->next_ant_in_line = arriving_ant;
-		arriving_ant = departing_ant;
-		curr_room_node = curr_room_node->next;
-		parent_room = curr_room;
-	}
-	ft_printf("%s", output);
-	free(output);
-}
-
-void			start_simulation(t_list *paths)
-{
-	bool	all_ants_at_end;
-	t_list	*curr_path;
-
-	all_ants_at_end = false;
-	while (!all_ants_at_end)
-	{
-		curr_path = paths;
-		all_ants_at_end = true;
-		// iterate through paths
-		while (curr_path)
-		{
-			// move ants along current path
-			send_ants_down_path(curr_path, &all_ants_at_end);
-			curr_path = curr_path->next;
-		}
-		ft_printf("\n");
-	}
 }
 
 int				main(void)

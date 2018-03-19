@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/16 19:10:09 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 12:30:02 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int				init_room(t_room **p_room, int type);
 int				init_start_room(t_lem *meta, t_room *start);
 int				add_end_room(t_lem *meta, t_room *room);
 int				init_lem(t_lem **p_meta);
+void			start_simulation(t_list *paths);
 
 #endif
