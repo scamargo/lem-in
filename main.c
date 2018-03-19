@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/16 23:08:43 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 11:52:12 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ static void		send_ants_down_path(t_list *current_path, bool *p_all_ants_at_end)
 {
 	int departing_ant;
 	int arriving_ant;
-	t_room *curr_room;
-	t_room *parent_room;
-	t_list *curr_room_node;
+	t_room	*curr_room;
+	t_room	*parent_room;
+	t_list	*curr_room_node;
+	char	*output;
 	
+	output = "";
 	curr_room_node = (t_list*)current_path->content;
 	arriving_ant = 0;
 	while (curr_room_node)
@@ -80,7 +82,8 @@ static void		send_ants_down_path(t_list *current_path, bool *p_all_ants_at_end)
 		curr_room = *(t_room**)curr_room_node->content;
 		if (arriving_ant)
 		{
-			ft_printf("L%i-%s ", arriving_ant, curr_room->name);
+			ft_asprintf(&output, "L%i-%s %s", arriving_ant, curr_room->name, output);
+			//ft_printf("L%i-%s ", arriving_ant, curr_room->name);
 			curr_room->number_of_ants++;
 			if (curr_room->type != 2)
 				*p_all_ants_at_end = false;
@@ -99,6 +102,8 @@ static void		send_ants_down_path(t_list *current_path, bool *p_all_ants_at_end)
 		curr_room_node = curr_room_node->next;
 		parent_room = curr_room;
 	}
+	ft_printf("%s", output);
+	free(output);
 }
 
 void			start_simulation(t_list *paths)
