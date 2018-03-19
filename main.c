@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 12:30:23 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:43:46 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,17 @@ int				main(void)
 		return (1);
 	}
 	baseline = 0;
-	// TODO: remove two lines below
-	new_path = found_another_path(meta, &baseline);
-	ft_lstadd(&paths, new_path);
-	/*while ((new_path = found_another_path(meta, &baseline)))
+	paths = NULL;
+	while ((new_path = found_another_path(meta, &baseline)))
 	{
 		ft_lstadd(&paths, new_path);
-	}*/
+	}
+	if (!paths)
+	{
+		perror("no path found");
+		ft_printf("ERROR\n");
+		return (2);
+	}
 	ft_printf("%s\n", meta->input);
 	start_simulation(paths);
 	return (0);

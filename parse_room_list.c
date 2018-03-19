@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 10:02:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/16 19:01:41 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:09:46 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int	parse_room_details(t_lem *meta, char *room_text, t_room *room)
 }
 
 /*
-*** TODO: ensure room names dont start with "L"
 *** TODO: use enum e_room_type instead of int
 */
 
@@ -63,17 +62,18 @@ static int	parse_room(t_lem *meta, char *line, int type)
 		return (0);
 	if (!(parse_room_details(meta, line, room)))
 		return (0);
+	new = ft_lstnew(room, sizeof(t_room));
+	free(room);
 	if (type == 1)
 	{
-		if (!init_start_room(meta, room))
+		if (!init_start_room(meta, (t_room*)new->content))
 			return (0);
 	}
 	else if (type == 2)
 	{
-		if (!add_end_room(meta, room))
+		if (!add_end_room(meta, (t_room*)new->content))
 			return (0);
 	}
-	new = ft_lstnew(room, sizeof(t_room));
 	ft_lstadd(&meta->rooms, new);
 	return (1);
 }

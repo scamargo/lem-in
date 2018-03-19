@@ -33,7 +33,8 @@ echo "duplicate start rooms:"
 ./lem-in < maps/duplicate_start_invalid.map
 echo "room name starts with L:"
 ./lem-in < maps/starts_with_L_invalid.map
-
+echo "no path found: "
+./lem-in < maps/no_path_invalid.map
 
 echo
 echo "VALID CASES"

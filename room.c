@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:36:17 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/16 19:02:15 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:29:56 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			init_start_room(t_lem *meta, t_room *start)
 {
 	if (meta->start)
 	{
-		perror("can't have more than one start\n");
+		perror("can't have more than one start");
 		return (0);
 	}
 	start->number_of_ants = meta->number_of_ants;
@@ -44,10 +44,9 @@ int			init_room(t_room **p_room, int type)
 		return (0);
 	room = *p_room;
 	room->type = type;
-	room->visited = 0;
 	room->parent = NULL;
 	room->adjecent_rooms = NULL;
-	room->visited = false;
+	room->blocked = false;
 	room->number_of_ants = 0;
 	room->next_ant_in_line = 0;
 	return (1);

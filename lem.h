@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 12:30:02 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:59:54 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct	s_room
 	int				type;
 	struct s_room	**adjecent_rooms;
 	struct s_room	*parent;
-	bool			visited;
+	bool			blocked;
 	int				number_of_ants;
 	int				next_ant_in_line;
 }				t_room;
