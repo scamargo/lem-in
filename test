@@ -40,3 +40,6 @@ echo
 echo "VALID CASES"
 echo "valid map:"
 ./lem-in < maps/valid.map
+echo
+echo "parallel paths:"
+./lem-in < maps/parallel_paths_valid.map

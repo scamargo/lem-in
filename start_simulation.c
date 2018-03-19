@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:29:15 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 12:58:41 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:13:01 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void			start_simulation(t_list *paths)
 			path_head = (t_list*)curr_path->content;
 			move_ants(path_head, &all_ants_at_end, &output);
 			ft_printf("%s", output);
-			free(output);
 			curr_path = curr_path->next;
 		}
 		ft_printf("\n");
