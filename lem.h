@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:17:39 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 13:59:54 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:34:06 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct	s_lem
 int				parse_room_list(t_lem *meta, char **p_buffer, char **p_line);
 int				parse_tubes(t_lem *meta, char *buffer, char *current_line);
 int				get_room(t_list *curr_node, t_room **p_room, char *room_name);
-t_list			*found_another_path(t_lem *meta, size_t *baseline);
+t_list			*found_another_path(t_lem *meta);
 int				init_room(t_room **p_room, int type);
 int				init_start_room(t_lem *meta, t_room *start);
 int				add_end_room(t_lem *meta, t_room *room);

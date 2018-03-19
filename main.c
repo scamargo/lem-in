@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 11:14:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 15:43:46 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:34:19 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				main(void)
 	t_lem	*meta;
 	t_list	*paths;
 	t_list	*new_path;
-	size_t	baseline;
 
 	if (!init_lem(&meta))
 		return (2);
@@ -79,9 +78,8 @@ int				main(void)
 		ft_printf("ERROR\n");
 		return (1);
 	}
-	baseline = 0;
 	paths = NULL;
-	while ((new_path = found_another_path(meta, &baseline)))
+	while ((new_path = found_another_path(meta)))
 	{
 		ft_lstadd(&paths, new_path);
 	}

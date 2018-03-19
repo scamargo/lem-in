@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 16:52:47 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 16:16:58 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:35:30 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,23 +97,28 @@ static void		orphan_rooms(t_lem *meta)
 *** TODO: calc baseline and then send ants down it
 */
 
-t_list			*found_another_path(t_lem *meta, size_t *baseline)
+t_list			*found_another_path(t_lem *meta)
 {
 	t_list	*path;
 	t_room	*exit;
-	int		ants_on_slowest_path;
-	int		number_of_paths;
-	int		path_step_count;
 
 	if (!(exit = breadth_first_search(meta)))
 		return (NULL);
 	if (!(path = build_path(exit)))
 		return (NULL);
 	orphan_rooms(meta);
-	number_of_paths = 1;
-	ants_on_slowest_path = (int)(meta->number_of_ants / number_of_paths); // round down on purpose
-	path_step_count = 3; // add this to meta
-	*baseline = ants_on_slowest_path + path_step_count - 1; // Test
-	ft_printf("baseline: %i\n", *baseline);
 	return (path);
 }
+
+/*
+***		int ants_on_slowest_path;
+***		int number_of_paths;
+***		int path_step_count;
+***
+*** 	number_of_paths = 1;
+***		ants_on_slowest_path =
+***			(int)(meta->number_of_ants / number_of_paths); // rounding
+***		path_step_count = 3; // add this to meta
+***		*baseline = ants_on_slowest_path + path_step_count - 1; // Test
+***		ft_printf("baseline: %i\n", *baseline);
+*/
