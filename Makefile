@@ -12,3 +12,13 @@ all:
 	
 test:
 	$(CC) -o $(NAME) $(SRCS) -L. $(LIB) -I $(INC)
+
+fclean:
+	rm -f $(NAME)
+
+clean:
+	rm -f $(NAME)
+
+re:
+	fclean all
+
