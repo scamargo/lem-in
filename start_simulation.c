@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:29:15 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 16:13:01 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 21:11:59 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		queue_next_ant(t_room *room, int new_ant, bool *p_ants_at_end)
 		room->next_ant_in_line = new_ant;
 }
 
-static void		move_ants(t_list *curr_node, bool *p_ants_at_end, char **p_out)
+static void		move_ants(t_list *curr_node, bool *p_ants_at_end)
 {
 	int		departing_ant;
 	int		arriving_ant;
@@ -35,8 +35,7 @@ static void		move_ants(t_list *curr_node, bool *p_ants_at_end, char **p_out)
 		curr_room = *(t_room**)curr_node->content;
 		if (arriving_ant)
 		{
-			ft_asprintf(p_out, "L%i-%s %s",
-					arriving_ant, curr_room->name, *p_out);
+			ft_printf("L%i-%s ", arriving_ant, curr_room->name);
 			curr_room->number_of_ants++;
 			if (curr_room->type != 2)
 				*p_ants_at_end = false;
@@ -53,7 +52,6 @@ void			start_simulation(t_list *paths)
 {
 	bool	all_ants_at_end;
 	t_list	*curr_path;
-	char	*output;
 	t_list	*path_head;
 
 	all_ants_at_end = false;
@@ -63,10 +61,8 @@ void			start_simulation(t_list *paths)
 		all_ants_at_end = true;
 		while (curr_path)
 		{
-			output = "";
 			path_head = (t_list*)curr_path->content;
-			move_ants(path_head, &all_ants_at_end, &output);
-			ft_printf("%s", output);
+			move_ants(path_head, &all_ants_at_end);
 			curr_path = curr_path->next;
 		}
 		ft_printf("\n");

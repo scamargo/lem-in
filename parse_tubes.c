@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:51:16 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 16:27:40 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/19 21:29:59 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static int		add_connection(int max_conn, t_room *room, t_room *adjecent)
 	return (1);
 }
 
+static void		free_stuff(char **r_arr, char *curr_line)
+{
+	free(r_arr[0]);
+	free(r_arr[1]);
+	free(r_arr);
+	free(curr_line);
+}
+
 int				parse_tubes(t_lem *meta, char *buffer, char *current_line)
 {
 	char	**r_arr;
@@ -42,9 +50,8 @@ int				parse_tubes(t_lem *meta, char *buffer, char *current_line)
 		if (current_line[0] != '#')
 		{
 			r_arr = ft_strsplit(current_line, '-');
-			if (!r_arr[0] || !r_arr[1] || r_arr[2] != 0)
-				return (1);
-			if (!ft_strcmp(r_arr[0], r_arr[1]) ||
+			if (!r_arr[0] || !r_arr[1] || r_arr[2] != 0 ||
+				!ft_strcmp(r_arr[0], r_arr[1]) ||
 				!get_room(meta->rooms, &r1, r_arr[0]) ||
 				!get_room(meta->rooms, &r2, r_arr[1]))
 				return (1);
@@ -52,6 +59,7 @@ int				parse_tubes(t_lem *meta, char *buffer, char *current_line)
 				!add_connection(meta->number_of_rooms, r2, r1))
 				return (1);
 		}
+		free_stuff(r_arr, current_line);
 		if (!ft_get_line(&buffer, &current_line))
 			break ;
 	}
