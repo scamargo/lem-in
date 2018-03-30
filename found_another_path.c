@@ -6,7 +6,7 @@
 /*   By: scamargo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 16:52:47 by scamargo          #+#    #+#             */
-/*   Updated: 2018/03/19 16:35:30 by scamargo         ###   ########.fr       */
+/*   Updated: 2018/03/29 21:22:52 by scamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,17 @@ static t_room	*breadth_first_search(t_lem *meta)
 	{
 		adjecent_to_queue(curr_room, queue, &exit);
 		if (exit)
+		{
+			while(!ft_is_queue_empty(queue))
+				ft_dequeue(queue);
+			free(queue);
 			return (exit);
+		}
 		if (!queue->first)
+		{
+			free(queue);
 			return (NULL);
+		}
 		curr_room = (t_room*)ft_dequeue(queue);
 	}
 }
@@ -76,6 +84,7 @@ static t_list	*build_path(t_room *room)
 	}
 	if (!(path = ft_lstnew(head_room_node, sizeof(t_list))))
 		return (NULL);
+	free(head_room_node);
 	return (path);
 }
 
